@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     
     public GameObject player;
+    private Vector3 mousePos;
+    public float movSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        player.transform.position = mousePos;
+        mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        transform.position = Vector2.Lerp(transform.position, mousePos, movSpeed);
     }
 }
