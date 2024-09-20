@@ -6,13 +6,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     
-    public GameObject player;
+    private GameObject player;
     private Vector3 mousePos;
-    public float movSpeed;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        player = this.gameObject;
         Cursor.visible = false;
     }
     // Update is called once per frame
@@ -20,6 +22,6 @@ public class PlayerMovement : MonoBehaviour
     {
         mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.position = Vector2.Lerp(transform.position, mousePos, movSpeed);
+        rb.MovePosition(mousePos);
     }
 }
