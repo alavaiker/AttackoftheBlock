@@ -16,6 +16,7 @@ public class EnemyStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Le añadimos al RigidBody una fuerza a una direccion aleatoria
         float random = Random.Range(0, 360);
         rb.AddForce(new Vector2(Mathf.Cos(random), Mathf.Sin(random)) * force);
     }
