@@ -264,7 +264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4727393864525942509, guid: b325a1d40705cfd418fe90b83b024466, type: 3}
       propertyPath: iframeSecs
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7514166171208654487, guid: b325a1d40705cfd418fe90b83b024466, type: 3}
       propertyPath: m_Name
