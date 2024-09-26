@@ -19,7 +19,7 @@ public class PlayerDeath : MonoBehaviour
         // Cuando derecta que el jugador colisione con el GameObject con el tag de enemy llama al metodo "EndGame"
         if (other.gameObject.tag == "Enemy")
         {
-            EndGame();
+            // EndGame();
         }
     }
 }
