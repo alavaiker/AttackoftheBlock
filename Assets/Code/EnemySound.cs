@@ -20,12 +20,10 @@ public class EnemySound : MonoBehaviour
     {
         if (coll.collider.tag != "Player")
         {
-            Debug.Log("Hit");
             audioController.clip = bounce;
             audioController.Play();
         } else
         {
-            Debug.Log("Hit player");
             audioController.clip = hitPlayer;
             audioController.Play();
         }

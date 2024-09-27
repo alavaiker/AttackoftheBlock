@@ -157,7 +157,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06129c731b8742946bcd98eb83e73ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: 
-  lives: 0
-  iframeSecs: 0
+  gameOver: GameOver
+  lives: 3
+  iframeSecs: 3
+  playerHitSprite: {fileID: 21300000, guid: 499f8e0846a0851419d11fc0d3a39690, type: 3}
