@@ -20,20 +20,22 @@ public class PlayerDeath : MonoBehaviour
 
     void hitPlayer()
     {
-        for (int i = 0; i < iframeSecs; i += (int)Time.deltaTime)
-        {
-            Debug.Log("BBBBBBBBBBBBBBBBBBBB");
-            
-            lives--;
-            Debug.Log("Te quedan " + lives + " vidas");
-        }
-        
+            if (lives >= 0)
+            {
+                lives--;
+                Debug.Log("Te quedan " + lives + " vidas");
+            } else
+                {
+                    EndGame();
+                }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         // Cuando derecta que el jugador colisione con el GameObject con el tag de enemy llama al metodo "EndGame"
         if (other.gameObject.tag == "Enemy")
         {
+            Cursor.visible = true;
+            
             hitPlayer();
         }
     }
