@@ -18,6 +18,7 @@ public class EnemySound : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+        // Genera un sonido de rebote cuando el enemigo nop golpea al jugador y cuando lo golpea genera un sonido de golpe
         if (coll.collider.tag != "Player")
         {
             audioController.clip = bounce;

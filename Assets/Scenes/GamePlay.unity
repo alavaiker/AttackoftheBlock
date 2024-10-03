@@ -319,7 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7045435a4aa5de34fa652b78f282c9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerBall: {fileID: 5096177437991218425, guid: 700dd87799053ab4fa1e9f8b05cfb23d, type: 3}
+  powerBall:
+  - {fileID: 5096177437991218425, guid: 700dd87799053ab4fa1e9f8b05cfb23d, type: 3}
 --- !u!1001 &252758539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -750,7 +751,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33dcc777e40b01d48ae624b54b7552ea, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -4,31 +4,43 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-    [SerializeField] private GameObject powerBall;
+    [SerializeField] private GameObject[] powerBall;
     private GameObject powerBallInstance;
-    public static PowerUpController Instance;
+    
+    //*******************************************************************
+    // Creamos un sigleton
+    //*******************************************************************
+    private static PowerUpController _Instance;
+    public static PowerUpController GetInstance => _Instance;
 
     private void Awake() 
     { 
-        // If there is an instance, and it's not me, delete myself.
+        // Si se crea una instacia y ya existe una se borra la creada
         
-        if (Instance != null && Instance != this) 
+        if (_Instance != null && _Instance != this) 
         { 
             Destroy(this); 
         } 
         else 
         { 
-            Instance = this; 
+            _Instance = this; 
             DontDestroyOnLoad(this.gameObject);
         } 
     }
 
+    //*******************************************************************
+    // Hasta aqui es la creacion del singleton
+    //*******************************************************************
+
     // Update is called once per frame
     void Start()
     {
-        if (powerBall)
+        if (powerBall.Length > 0)
         {
-            InvokeRepeating(nameof(Spawn), 0, 20);
+            if (powerBall[0])
+            {
+                InvokeRepeating(nameof(Spawn), 10, 20);
+            }
         }
     }
 
@@ -36,7 +48,7 @@ public class PowerUpController : MonoBehaviour
     {
         if (powerBallInstance == null)
         {
-            powerBallInstance = Instantiate(powerBall) ;
+            powerBallInstance = Instantiate(powerBall[Random.Range(0, powerBall.Length)]) ;
         }
     }
 

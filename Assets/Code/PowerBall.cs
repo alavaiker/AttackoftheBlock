@@ -22,9 +22,10 @@ public class PowerBall : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D other)
     {
+        // Cuando entre en colision con el player se llamara a la funcion de ActivatePowerUp de la clase PowerUpController y se destrulle el objeto
         if (other.gameObject.tag == "Player")
         {
-            PowerUpController.Instance.ActivatePowerUp();
+            PowerUpController.GetInstance.ActivatePowerUp();
             Destroy(gameObject);
         }
     }
