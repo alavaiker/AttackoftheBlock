@@ -22,12 +22,31 @@ public class PowerBall : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D other)
     {
-        // Cuando entre en colision con el player se llamara a la funcion de ActivatePowerUp de la clase PowerUpController y se destrulle el objeto
+        // Cuando entre en colision con el player se llamara a la funcion de ActivatePowerUp, lo envia a una zona fuera del mapa y llama a la funcion de DestroyPowerUp
         if (other.gameObject.tag == "Player")
         {
-            PowerUpController.GetInstance.ActivatePowerUp();
-            Destroy(gameObject);
+            ActivatePowerUp();
+            rb.transform.position = new Vector3(20, 20, 1);
+            Invoke(nameof(DestroyPoweUp), 5);
         }
     }
     
+    // Devuelve el tiempo a la normalidad
+    void ReturnTime()
+    {
+        Time.timeScale = 1;
+    }
+
+    // Activa el poder de realentizar el tiempo
+    public void ActivatePowerUp()
+    {
+        Time.timeScale = .5f;
+        Invoke(nameof(ReturnTime), 3*Time.timeScale);
+    }
+
+    // Destruye el objeto
+    public void DestroyPoweUp()
+    {
+        Destroy(gameObject);
+    }
 }

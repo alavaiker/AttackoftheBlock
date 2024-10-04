@@ -11,6 +11,8 @@ public class EnemyStart : MonoBehaviour
     private void Awake() {
         // Asignamos a la variable rb el componente RigidBody2D
         rb = GetComponent<Rigidbody2D>();
+
+        Time.timeScale = 1f;
     }
 
     // Start is called before the first frame update
