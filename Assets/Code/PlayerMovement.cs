@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     
     private GameObject player;
-    private Vector3 mousePos;
+    public Vector3 mousePos;
     private Rigidbody2D rb;
 
     private void Awake() {

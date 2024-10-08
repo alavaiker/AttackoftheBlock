@@ -11,6 +11,12 @@ public class EsceneChange : MonoBehaviour
         SceneManager.LoadScene("GamePlay");
     }
 
+    // Script que lleva al menu principal
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
     // Script que termina el juego
     public void Exit()
     {
