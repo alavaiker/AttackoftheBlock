@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
         // Asignamos a la variable player el propio GameObject player y hacemos el cursor invisible
         player = this.gameObject;
         Cursor.visible = false;
+        Vector2 pos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+        Mouse.current.WarpCursorPosition(pos);
     }
     // Update is called once per frame
     void Update()

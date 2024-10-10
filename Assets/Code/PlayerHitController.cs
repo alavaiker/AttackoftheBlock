@@ -10,19 +10,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
 
-public class PlayerDeath : MonoBehaviour
+public class PlayerHitController : MonoBehaviour
 {
     [SerializeField]private string gameOver;
     [SerializeField]public int totalLives;
     [SerializeField]private float iframeSecs;
+    [SerializeField]private float parrySecs;
+    [SerializeField]private float parryCd;
     private bool invulnerable;
     [SerializeField]private Sprite playerHitSprite;
     private SpriteRenderer SR;
     [SerializeField] RawImage[] lives;
+    private bool parryStance;
 
     void Start()
     {
         SR = GetComponent<SpriteRenderer>();
+        parryStance = false;
     }
 
     // Metodo que al ser llamado cambia de escena a la de game over
@@ -30,6 +34,16 @@ public class PlayerDeath : MonoBehaviour
     {
         Cursor.visible = true;
         SceneManager.LoadScene(gameOver);
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!invulnerable && !parryStance)
+            {
+                StartCoroutine(Parry());
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -43,8 +57,33 @@ public class PlayerDeath : MonoBehaviour
         }
     }
 
-    // Corrutina que controla todo lo que hay que vigilar sobre la vida del jugador
 
+    IEnumerator Parry()
+    {
+        invulnerable = true;
+
+        Sprite Currentsprite= SR.sprite;
+        SR.sprite = playerHitSprite;
+
+        yield return new WaitForSeconds(parrySecs);
+
+        SR.sprite = Currentsprite;
+        
+        StartCoroutine(ParryCd());
+
+        invulnerable = false;
+    }
+
+    IEnumerator ParryCd()
+    {
+        parryStance = true;
+
+        yield return new WaitForSeconds(parryCd);
+
+        parryStance = false;
+    }
+
+    // Corrutina que controla todo lo que hay que vigilar sobre la vida del jugador
     // Controla las vidas del jugador junto a las del camvas
     // Controla los tiempos de invulnerabilidad al ser golpeado
     IEnumerator HitPlayer()
