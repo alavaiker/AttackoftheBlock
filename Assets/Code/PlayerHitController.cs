@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
+using TMPro;
 
 public class PlayerHitController : MonoBehaviour
 {
@@ -19,9 +22,12 @@ public class PlayerHitController : MonoBehaviour
     [SerializeField]private float parryCd;
     private bool invulnerable;
     [SerializeField]private Sprite playerHitSprite;
+    [SerializeField]private Sprite playerParrySprite;
     private SpriteRenderer SR;
     [SerializeField] RawImage[] lives;
     private bool parryStance;
+    public ScoreCounter scores;
+    public TextMeshProUGUI message;
 
     void Start()
     {
@@ -32,11 +38,37 @@ public class PlayerHitController : MonoBehaviour
     // Metodo que al ser llamado cambia de escena a la de game over
     private void EndGame()
     {
+        if (scores.score > PlayerPrefs.GetInt("Puntuacion5"))
+        {
+            updateScoreBoard();
+        }
         Cursor.visible = true;
         SceneManager.LoadScene(gameOver);
     }
 
+    // Actualiza las mejores puntuaciones
+    private void updateScoreBoard()
+    {
+        List<int> scoreList = new List<int>();
+
+        scoreList.Add(PlayerPrefs.GetInt("Puntuacion1"));
+        scoreList.Add(PlayerPrefs.GetInt("Puntuacion2"));
+        scoreList.Add(PlayerPrefs.GetInt("Puntuacion3"));
+        scoreList.Add(PlayerPrefs.GetInt("Puntuacion4"));
+        scoreList.Add(PlayerPrefs.GetInt("Puntuacion5"));
+        scoreList.Add(scores.score);
+
+        scoreList = scoreList.OrderByDescending(i => i).ToList();
+
+        for (int i = 0; i < scoreList.Count-1; i++)
+        {
+            var t = "Puntuacion" + (i+1);
+            PlayerPrefs.SetInt(t, scoreList[i]);
+        }
+    }
+
     void Update() {
+        // Cuando el jugador presione la tecla de espacio dependiendo de dependiendo del estado del jugador, este hara un parry o no
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!invulnerable && !parryStance)
@@ -57,13 +89,15 @@ public class PlayerHitController : MonoBehaviour
         }
     }
 
-
+    // Corrutina que controla los parrys y los tiempos de espera cambiando tambien el sprite del jugador
     IEnumerator Parry()
     {
         invulnerable = true;
 
         Sprite Currentsprite= SR.sprite;
-        SR.sprite = playerHitSprite;
+        SR.sprite = playerParrySprite;
+
+        message.enabled = false;
 
         yield return new WaitForSeconds(parrySecs);
 
@@ -79,6 +113,8 @@ public class PlayerHitController : MonoBehaviour
         parryStance = true;
 
         yield return new WaitForSeconds(parryCd);
+
+        message.enabled = true;
 
         parryStance = false;
     }

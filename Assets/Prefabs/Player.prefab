@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f075c1742c8a944ba6f59bc90025ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0, z: 0}
 --- !u!61 &7349641769985975945
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -187,8 +188,13 @@ MonoBehaviour:
   gameOver: GameOver
   totalLives: 3
   iframeSecs: 3
+  parrySecs: 0.5
+  parryCd: 5
   playerHitSprite: {fileID: 21300000, guid: 499f8e0846a0851419d11fc0d3a39690, type: 3}
+  playerParrySprite: {fileID: 21300000, guid: 833b08811318fe5499b6acc85db221b4, type: 3}
   lives:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  scores: {fileID: 0}
+  message: {fileID: 0}

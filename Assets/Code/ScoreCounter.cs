@@ -11,15 +11,17 @@ public class ScoreCounter : MonoBehaviour
     private TextMeshProUGUI scoreBar;
     public int score;
 
+    // Controla la puntuacion de la partida sumando 10 puntos por segundo
+
     private void Start() {
         score = 0;
         scoreBar = GetComponent<TMPro.TextMeshProUGUI>();
+        InvokeRepeating(nameof(UpdateCounter), 1, 1);
     }
 
-    void FixedUpdate()
+    void UpdateCounter()
     {
-        score = (int)Time.time * 10;
-        Debug.Log(score);
-        scoreBar.SetText(score.ToString());
+        score += 10;
+        scoreBar.text = score.ToString();
     }
 }
