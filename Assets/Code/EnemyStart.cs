@@ -7,6 +7,7 @@ public class EnemyStart : MonoBehaviour
 
     private Rigidbody2D rb;
     public float force;
+    public int secs = 1;
 
     private void Awake() {
         // Asignamos a la variable rb el componente RigidBody2D
@@ -21,5 +22,21 @@ public class EnemyStart : MonoBehaviour
         // Le añadimos al RigidBody una fuerza a una direccion aleatoria
         float random = Random.Range(0, 360);
         rb.AddForce(new Vector2(Mathf.Cos(random), Mathf.Sin(random)) * force);
+        InvokeRepeating(nameof(Timer), 1, 1);
+    }
+
+    private void Timer()
+    {
+        secs = secs+1;
+        if (secs % 5 == 0)
+        {
+            Debug.Log("*1,2");
+            rb.velocity = rb.velocity * 1.2f;
+        }
+    }
+
+    void Update ()
+    {
+        
     }
 }
